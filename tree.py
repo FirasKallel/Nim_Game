@@ -27,18 +27,18 @@ class Tree:
                     self.generateTree(child)
     def evaluateTreeMinMax(self,currentNode:Node):
         if currentNode.is_leaf:
-            currentNode.evaluator_value = 1 if (currentNode.depth % 2 == 1) else -1
+            currentNode.evaluator_value = 1 if self.isFirst == (currentNode.depth % 2 == 1) else -1
         else:
             childEvaluateValues = []
             for child in currentNode.children:
                 self.evaluateTreeMinMax(child)
                 childEvaluateValues.append(child.evaluator_value)
-            evaluate = max(childEvaluateValues) if (currentNode.depth%2 == 0)else min(childEvaluateValues)
+            evaluate = max(childEvaluateValues) if (currentNode.depth % 2 == 0)else min(childEvaluateValues)
             currentNode.evaluator_value=evaluate
         self.nodesVisited += 1
     def evaluateTreeAlphaBeta(self,currentNode:Node,parentEvaluator:int=None):
         if currentNode.is_leaf:
-            currentNode.evaluator_value = 1 if (currentNode.depth % 2 == 1)else -1
+            currentNode.evaluator_value = 1 if self.isFirst == (currentNode.depth % 2 == 1)else -1
         else:
             childEvaluateValues = []
             current_evaluation: int = None
